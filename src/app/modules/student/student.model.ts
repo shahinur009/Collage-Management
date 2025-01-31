@@ -6,6 +6,7 @@ import {
   TStudent,
   TUserName,
 } from './student.interface';
+import { AcademicSemester } from '../academicSemester/academicSemester.model';
 
 const UserNameSchema = new Schema<TUserName>({
   firstName: {
@@ -131,6 +132,10 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: [true, 'User Local Guardian Is Required'],
     },
     profileImage: { type: String },
+    admissionSemester: {
+      type: Schema.Types.ObjectId,
+      ref: AcademicSemester,
+    },
     isDeleted: {
       type: Boolean,
       default: false,
@@ -152,14 +157,12 @@ studentSchema.virtual('fullName').get(function () {
 
 //Query Middleware/hook
 studentSchema.pre('find', function (next) {
-  console.log('hi');
   this.find({ isDeleted: { $ne: true } });
 
   next();
 });
 
 studentSchema.pre('findOne', function (next) {
-  console.log('find one');
   this.findOne({ isDeleted: { $ne: true } });
 
   next();
