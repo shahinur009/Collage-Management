@@ -49,7 +49,7 @@ userSchema.pre('save', async function (next) {
 
 // save '' after saving password
 userSchema.post('save', function (doc, next) {
-  console.log(this, 'Post hook: We saved our data');
+  // console.log(this, 'Post hook: We saved our data');
   doc.password = '';
   next();
 });

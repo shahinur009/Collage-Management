@@ -13,7 +13,7 @@ router.post(
   AcademicSemesterControllers.createAcademicSemester,
 );
 
-router.get(
+router.patch(
   '/:semesterId',
   validateRequest(
     AcademicSemesterValidations.updateAcademicSemesterValidationSchema,

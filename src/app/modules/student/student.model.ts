@@ -1,3 +1,4 @@
+import { AcademicDepartment } from './../academicDepartment/academicDepartment.model';
 import { Schema, model } from 'mongoose';
 import {
   StudentModel,
@@ -139,6 +140,10 @@ const studentSchema = new Schema<TStudent, StudentModel>(
     isDeleted: {
       type: Boolean,
       default: false,
+    },
+    academicDepartment: {
+      type: Schema.Types.ObjectId,
+      ref: AcademicDepartment,
     },
   },
   {

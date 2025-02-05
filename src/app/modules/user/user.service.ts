@@ -17,7 +17,9 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
   const admissionSemester = await AcademicSemester.findById(
     payload.admissionSemester,
   );
-
+  if (!admissionSemester) {
+    throw new Error('Invalid admission semester ID');
+  }
   // set manually generated id
   userData.id = await generateStudentId(admissionSemester);
   const newUser = await User.create(userData);
